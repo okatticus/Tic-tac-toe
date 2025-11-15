@@ -1,3 +1,4 @@
+from colorama import Fore,Style,init
 board = [
     ["","",""],
     ["","",""],
@@ -96,25 +97,45 @@ def checkWinner(b):
 
     return "Tie"
 
+def colored(player):
+    if player=="X":
+        return f"{Fore.CYAN}X{Style.RESET_ALL}"
+    elif player=="0":
+        return f"{Fore.GREEN}0{Style.RESET_ALL}"
+    else:
+        return " "
+
+def printColored(b):
+    for i in range(3):
+        print(" "+" |".join(colored(b[i][j]) for j in range(3)))
+        if i< 2:
+            print("------------")
+    print("\n")
     
 if __name__=="__main__":
     
     while True:
         humanTurn()
         print("-------Board situation-------")
-        print(board)
+        printColored(board)
         winner =checkWinner(board)
         if winner!=None:
             print("----------------------------")
+            if winner=="Tie":
+                print("Game ended in Tie.")
+                break
             print(f"Congratulations to {winner}. {winner} won.")
             break
 
         findBestMove(board)
         print("0 playes")
         print("-------Board situation-------")
-        print(board)
+        printColored(board)
         winner =checkWinner(board)
         if winner!=None:
             print("----------------------------")
+            if winner=="Tie":
+                print("Game ended in Tie.")
+                break
             print(f"Congratulations to {winner}. {winner} won.")
             break
