@@ -11,11 +11,12 @@ human="X"
 def humanTurn():
     x=int(input("Give x-axis (0-2): "))
     y=int(input("Give y-axis (0-2):  "))
+    if x<0 or x>=3 or y<0 or y>=3 or board[x][y]!="":
+        print("Invalid input axes.Please try again")
+        humanTurn()
+        return
     if board[x][y]=="":
         board[x][y]=human
-    else:
-        print("Invalid input axes")
-        humanTurn()
     
 
 
